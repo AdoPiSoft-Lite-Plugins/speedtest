@@ -1,2 +1,4 @@
-# speedtest
-A speedtest tool powered by speedtest.net. Use this to check the raw internet speed of your machine.
+1.0.3
+===================
+* Speed Test Tool for AdoPisoft Hotspot v4.1.3 and up
+* Can select specific server
