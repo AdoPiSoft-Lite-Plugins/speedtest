@@ -45,7 +45,7 @@ class FakeShutdownEvent(object):
     """
 
     @staticmethod
-    def isSet():
+    def is_set():
         "Dummy method to always return false"""
         return False
 
@@ -769,7 +769,7 @@ def print_dots(shutdown_event):
     status
     """
     def inner(current, total, start=False, end=False):
-        if shutdown_event.isSet():
+        if shutdown_event.is_set():
             return
 
         sys.stdout.write('.')
@@ -808,7 +808,7 @@ class HTTPDownloader(threading.Thread):
         try:
             if (timeit.default_timer() - self.starttime) <= self.timeout:
                 f = self._opener(self.request)
-                while (not self._shutdown_event.isSet() and
+                while (not self._shutdown_event.is_set() and
                         (timeit.default_timer() - self.starttime) <=
                         self.timeout):
                     self.result.append(len(f.read(10240)))
@@ -862,7 +862,7 @@ class HTTPUploaderData(object):
 
     def read(self, n=10240):
         if ((timeit.default_timer() - self.start) <= self.timeout and
-                not self._shutdown_event.isSet()):
+                not self._shutdown_event.is_set()):
             chunk = self.data.read(n)
             self.total.append(len(chunk))
             return chunk
@@ -900,7 +900,7 @@ class HTTPUploader(threading.Thread):
         request = self.request
         try:
             if ((timeit.default_timer() - self.starttime) <= self.timeout and
-                    not self._shutdown_event.isSet()):
+                    not self._shutdown_event.is_set()):
                 try:
                     f = self._opener(request)
                 except TypeError:
@@ -1873,7 +1873,7 @@ def shell():
         speedtest = Speedtest(
             source_address=args.source,
             timeout=args.timeout,
-            secure=args.secure
+            secure=True
         )
     except (ConfigRetrievalError,) + HTTP_ERRORS:
         printer('Cannot retrieve speedtest configuration', error=True)
